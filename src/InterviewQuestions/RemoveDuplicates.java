@@ -1,5 +1,6 @@
 package InterviewQuestions;
 
+import java.util.HashSet;
 
 //Write a program to remove duplicates from an unsorted LinkedList
 //Also Follow up -- How would you solve this problem if a temporary buffer is not allowed.
@@ -59,6 +60,25 @@ public class RemoveDuplicates {
 		prev_node.next = newNode;
 		return;
 	}
+	
+	public void removeDups(Node head) {
+		HashSet<Integer> hs = new HashSet<>();
+		Node current = head;
+		Node prev = null;
+		while(current != null) {
+			int currentval = current.data;
+			if(hs.contains(currentval)) {
+				prev.next = current.next;
+			}
+				else {
+					hs.add(currentval);
+					prev = current;
+				}
+			current = current.next;
+			}
+		}
+		
+		
 
 	public static void main(String[] args) {
 		RemoveDuplicates list = new RemoveDuplicates();
@@ -68,6 +88,10 @@ public class RemoveDuplicates {
 		list.append(6);
 		list.append(10);
 		list.insertAfter(list.head.next.next, 8);
+		list.printlist();
+		System.out.print("\n\n");
+		System.out.print("the given updated linkedlist is : ");
+		list.removeDups(list.head);
 		list.printlist();
 		// Trying to understand duplicates
 	}
